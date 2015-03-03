@@ -1,0 +1,170 @@
+testcase1
+start    :   0
+a	-  	0
+b	b	1
+c	b	3
+d	b	6
+e	b	10
+f	b	15
+g	b	21
+h	b	28
+
+start    :   3
+a	c	6
+b	c	5
+c	c	3
+d	-  	0
+e	e	4
+f	e	9
+g	e	15
+h	e	22
+
+ 
+testcase2
+start    :   0
+aa	-  	0
+ab	ab	1
+ac	ab	3
+ad	ab	6
+ae	ab	10
+af	ab	15
+ag	ah	15
+ah	ah	8
+
+start    :   3
+aa	ac	6
+ab	ac	5
+ac	ac	3
+ad	-  	0
+ae	ae	4
+af	ae	9
+ag	ae	15
+ah	ac	14
+
+ 
+testcase3
+start    :   0
+A	-  	0
+B	B	3
+C	C	4
+D	D	5
+E	E	6
+F	F	7
+G	G	8
+H	H	9
+I	I	10
+JJ	JJ	11
+KK	KK	12
+LL	LL	13
+
+start    :   11
+A	A	13
+B	B	11
+C	B	13
+D	B	15
+E	KK	14
+F	KK	12
+G	KK	10
+H	KK	8
+I	KK	6
+JJ	KK	4
+KK	KK	2
+LL	-  	0
+
+ 
+testcase4
+start    :   0
+aa	-  	0
+ab	ab	1
+ac	ab	2
+ad	ab	3
+ae	ab	4
+af	ah	3
+ag	ah	2
+ah	ah	1
+ai	ai	2
+aj	ak	2
+ak	ak	1
+
+start    :   8
+aa	aa	2
+ab	aa	3
+ac	aa	4
+ad	aa	5
+ae	ah	4
+af	ah	3
+ag	ah	2
+ah	ah	1
+ai	-  	0
+aj	aj	1
+ak	aj	2
+
+ 
+testcase5
+start    :   0
+A	-  	0
+B	B	2
+AC	B	6
+C	C	5
+D	C	8
+AB	B	9
+ABA	B	8
+AA	C	7
+AAA	B	9
+
+start    :   5
+A	ABA	9
+B	ABA	7
+AC	ABA	3
+C	C	5
+D	AA	5
+AB	-  	0
+ABA	ABA	1
+AA	AA	4
+AAA	ABA	2
+
+ 
+testcase6
+start    :   0
+A	-  	0
+B	B	2
+G	G	5
+C	B	6
+F	G	8
+I	G	7
+E	B	9
+H	B	9
+D	B	8
+
+start    :   3
+A	B	6
+B	B	4
+G	D	8
+C	-  	0
+F	D	7
+I	D	6
+E	D	3
+H	D	3
+D	D	2
+
+ 
+testcase7
+start    :   0
+0	-  	0
+4	4	3
+1	4	5
+5	5	10
+6	4	8
+3	4	11
+2	4	9
+
+start    :   2
+0	4	5
+4	4	2
+1	-  	0
+5	5	6
+6	4	7
+3	2	6
+2	2	4
+
+ 

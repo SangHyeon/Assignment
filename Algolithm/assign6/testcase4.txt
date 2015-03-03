@@ -1,0 +1,22 @@
+11 19
+aa ab 1
+aa ac 3
+aa ad 4
+aa ae 5
+aa af 6
+aa ag 7
+aa ah 1
+aa ai 2
+aa aj 3
+ab ac 1
+ac ad 1
+ad ae 1
+ae af 1
+af ag 1
+ag ah 1
+ah ai 1
+ai aj 1
+aj ak 1
+ak aa 1
+2
+aa ai

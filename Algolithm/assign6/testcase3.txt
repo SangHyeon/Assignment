@@ -1,0 +1,24 @@
+12 22
+A B 3
+A C 4
+A D 5
+A E 6
+A F 7
+A G 8 
+A H 9
+A I 10
+A JJ 11
+A KK 12
+A LL 13
+B C 2
+C D 2
+D E 2
+E F 2
+F G 2
+G H 2
+H I 2
+I JJ 2
+JJ KK 2
+KK LL 2
+LL B 11
+2 A LL

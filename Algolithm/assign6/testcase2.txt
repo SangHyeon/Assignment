@@ -1,0 +1,11 @@
+8 8
+aa ab 1 
+ab ac 2
+ac ad 3
+ad ae 4
+ae af 5
+af ag 6
+ag ah 7
+ah aa 8
+2 
+aa ad
