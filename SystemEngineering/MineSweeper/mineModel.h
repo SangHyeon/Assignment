@@ -19,7 +19,7 @@ class mineModel {
 		void ReadFile();
 		void WriteFile();
 		void CompareData(RANK rank);
-
+		void PrintRank();
 };
 
 #endif
