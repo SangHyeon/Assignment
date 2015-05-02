@@ -26,13 +26,13 @@ void MineGenerator::DrawMineSweeper() {
 	}
 	cout<<endl;
 
-/*	for(int i=0; i<this->row; i++) {
+	for(int i=0; i<this->row; i++) {
 		for(int j=0; j<this->line;j++) 
 			cout<<MineTable[i][j].value<<" ";
 		cout<<endl;
 	}
 	cout<<endl;
-*/
+
 }
 
 void MineGenerator::Generator(int row, int line) {
@@ -78,7 +78,7 @@ void MineGenerator::Generator(int row, int line) {
 	while(1) {
 		t_row = rand()%row;
 		t_line = rand()%line;
-		if( (MineTable[t_row][t_line].value == 10) || (t_row == s_row && t_line && s_line) )
+		if( (MineTable[t_row][t_line].value == 10) || ((t_row == s_row) && (t_line == s_line)) )
 			continue;
 		else {
 			MineTable[t_row][t_line].value = 10;//It is Mine
@@ -156,8 +156,10 @@ int MineGenerator::SelectPoint() {
 	cout<<"Input the your position <row, column>: ";
 	while(1) {
 		cin>>row>>line;
-		if( (row > 0 && this->row >= row) && (line > 0 && this->line >= line))
+		if( ((row > 0) && (this->row >= row)) && ((line > 0) && (this->line >= line)) )
 			break;
+		else
+			cout<<"OUT OF SIZE : Re-Input position> ";
 	}
 	row--; line--;
 	//If select flag

@@ -1,11 +1,12 @@
 #ifndef __MINEMODEL___H___
 #define __MINEMODEL___H___
 #include<string>
+#include<fstream>
 using namespace std;
 
 struct RANK {
 	string id;
-	int time;
+	double time;
 	int size;
 };
 

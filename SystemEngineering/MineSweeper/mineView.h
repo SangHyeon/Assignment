@@ -5,7 +5,6 @@
 
 class MineViewer {
 	private:
-		MineGenerator mine;
 		int GameStart;
 	public:
 		void StartGame();
