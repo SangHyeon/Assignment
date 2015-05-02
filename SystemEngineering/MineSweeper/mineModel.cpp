@@ -33,11 +33,11 @@ void mineModel::CompareData(RANK rank) {
 		t_rank.time = Rank[i].time;
 		t_rank.size = Rank[i].size;
 		for(int j=i+1; j<6; j++) {
-			if(t_rank.time == Rank[j].time) {
-				if(t_rank.size < Rank[j].size)
+			if(t_rank.size == Rank[j].size) {
+				if(t_rank.time < Rank[j].time)
 					index = j;
 			}
-			else if(t_rank.time > Rank[j].time) 
+			else if(t_rank.size > Rank[j].size) 
 				index = j;
 		}
 		if(index != i) { //find high score
@@ -52,7 +52,7 @@ void mineModel::CompareData(RANK rank) {
 void mineModel::PrintRank() {
 	ReadFile();//re-read
 
-	cout<<"|  ID    |"<<" SIZE  |"<<"       TIME       "<<endl;
+	cout<<" |  ID    |"<<" SIZE   |"<<"       TIME       "<<endl;
 	for(int i=0; i<5; i++) {
 		cout<<" | "<<setw(6)<<Rank[i].id<<" | "<<setw(6)<<Rank[i].size<<"|   "<<
 			Rank[i].time<<endl<<endl;

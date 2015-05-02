@@ -52,8 +52,6 @@ void MineViewer::StartGame() {
 				cin>>id;
 				rank.id = id;
 				rank.time = (double)(end_time - start_time);//CLOCKS_PER_SEC;
-				cout<<"TIME!!!!  asdf   ";
-				printf("%5.2f \n", rank.time);
 				rank.size = (int)(row_size*line_size);
 				model.CompareData(rank);
 				model.PrintRank();
