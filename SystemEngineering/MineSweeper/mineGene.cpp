@@ -140,7 +140,9 @@ void MineGenerator::Generator(int row, int line) {
 void MineGenerator::Destroy() {
 	for(int i = 0; i < this->line; i++)
 		delete [] MineTable[i];
+	cout<<__LINE__<<endl;
 	delete [] MineTable;
+	cout<<__LINE__<<endl;
 }
 
 /*

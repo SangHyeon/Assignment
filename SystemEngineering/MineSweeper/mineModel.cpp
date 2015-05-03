@@ -34,10 +34,10 @@ void mineModel::CompareData(RANK rank) {
 		t_rank.size = Rank[i].size;
 		for(int j=i+1; j<6; j++) {
 			if(t_rank.size == Rank[j].size) {
-				if(t_rank.time < Rank[j].time)
+				if(t_rank.time > Rank[j].time)
 					index = j;
 			}
-			else if(t_rank.size > Rank[j].size) 
+			else if(t_rank.size < Rank[j].size) 
 				index = j;
 		}
 		if(index != i) { //find high score

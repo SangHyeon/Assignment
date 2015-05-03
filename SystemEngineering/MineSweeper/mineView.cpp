@@ -56,8 +56,11 @@ void MineViewer::StartGame() {
 				model.CompareData(rank);
 				model.PrintRank();
 			}
+			cout<<__LINE__<<"End of Ranking"<<endl;
 		}
+		cout<<__LINE__<<endl;
 		mine.Destroy();
+		cout<<__LINE__<<"End of Game"<<endl;
 		cout<<"Do you want to play the MineSweeper? <1: Yes, 0: Quit> "; 
 		cin>>GameStart;
 	}
