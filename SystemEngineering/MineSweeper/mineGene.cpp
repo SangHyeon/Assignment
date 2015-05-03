@@ -26,13 +26,13 @@ void MineGenerator::DrawMineSweeper() {
 	}
 	cout<<endl;
 
-	for(int i=0; i<this->row; i++) {
+/*	for(int i=0; i<this->row; i++) {
 		for(int j=0; j<this->line;j++) 
 			cout<<MineTable[i][j].value<<" ";
 		cout<<endl;
 	}
 	cout<<endl;
-
+*/
 }
 
 void MineGenerator::Generator(int row, int line) {
@@ -140,9 +140,9 @@ void MineGenerator::Generator(int row, int line) {
 void MineGenerator::Destroy() {
 	for(int i = 0; i < this->line; i++)
 		delete [] MineTable[i];
-	cout<<__LINE__<<endl;
+//	cout<<__LINE__<<endl;
 	delete [] MineTable;
-	cout<<__LINE__<<endl;
+//	cout<<__LINE__<<endl;
 }
 
 /*
@@ -199,7 +199,7 @@ int MineGenerator::SelectPoint() {
 				real_Flag_count++;
 
 			MineTable[row][line].Flag = true;
-			cout<<Flag_count<<" "<<Mine_count<<" "<<Click_count<<" "<<this->row*this->line<<endl;	
+			//cout<<Flag_count<<" "<<Mine_count<<" "<<Click_count<<" "<<this->row*this->line<<endl;	
 			if( (real_Flag_count == Flag_count) && (Flag_count == Mine_count) && (Click_count == (this->row*this->line)) ) {
 				DrawMineSweeper();
 				return 1;//you win

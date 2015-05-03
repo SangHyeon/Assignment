@@ -52,7 +52,7 @@ void mineModel::CompareData(RANK rank) {
 void mineModel::PrintRank() {
 	ReadFile();//re-read
 
-	cout<<" |  ID    |"<<" SIZE   |"<<"       TIME       "<<endl;
+	cout<<" |  ID    |"<<" SIZE  |"<<"       TIME       "<<endl;
 	for(int i=0; i<5; i++) {
 		cout<<" | "<<setw(6)<<Rank[i].id<<" | "<<setw(6)<<Rank[i].size<<"|   "<<
 			Rank[i].time<<endl<<endl;
