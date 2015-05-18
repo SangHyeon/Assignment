@@ -41,16 +41,27 @@ int main(int argc, char * argv[])
 				rec_lock(fd, record_no, seizeof(current), F_RDLCK);
 				pos = record_no * sizeof(struct record);
 				lseek(fd, pos, SEEK_SET);
-				n = read(fd, &current, sizeof(current));
+				n = read(fd, &current, sizeof(struct record));
 				display(&current);
-				rec_lock(fd, record_no, sizeof(current), F_UNLCK);
+				rec_lock(fd, record_no, sizeof(struct record), F_UNLCK);
 				break;
 			case 'd' : //deposit
-				rec_lock(fd, record_no, sizeof(current), F_WRLCK);
-
-		}
-
+				rec_lock(fd, record_no, sizeof(struct record), F_WRLCK);
+				pos = record_no * sizeof(struct record);
+				lseek(fd, pos, SEEK_SET);
+				n = read(fd, &current, sizeof(struct record));
+				display(&current);
+				printf("enter amount\n");
+				scanf("%d%*c", &amount);
+				current.balance += amount;
+				lseek(fd, pos, SEEK_SET);
+				write(fd, &current, sizeof(struct record));
+				rec_lock(fd, record_no, sizeof(struct record), F_UNLCK);
+				break;
+			default :
+				printf("input error\n");
+				continue;
+		};
 	}
-
-
+	close(fd);
 }
