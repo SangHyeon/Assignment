@@ -65,3 +65,30 @@ int main(int argc, char * argv[])
 	}
 	close(fd);
 }
+
+void rec_lock(int fd, int recno, int len, short type)
+{
+	struct flock fl;
+	switch (type) {
+		case F_RDLCK :
+		case F_WRLCK :
+		case F_UNLCK :
+			fl.l_type = type;
+			fl.l_whence = SEEK_SET;
+			fl.l_start = recno * len;
+			fl.l_len = len;
+			fcntl(fd, F_SETLKW, &fl);
+			return;
+		default:
+			return;
+	};
+}
+
+void display(struct record *current)
+{
+	printf("Account number  :  %d \n", current->id);
+	printf("Account owner   :  %s \n", current->name);
+	printf("Account balance :  %d \n", current->balance);
+
+	printf("\n");
+}
