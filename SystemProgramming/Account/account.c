@@ -24,7 +24,7 @@ int main(int argc, char * argv[])
 	char operation;
 	int amount = 0;
 	
-	if( (fd = open("Account_File", O_RDWR)) == -1)
+	if( (fd = open("Account_File.txt", O_RDWR)) == -1)
 		exit(1); //can not open file
 
 	while(1) {
@@ -38,7 +38,7 @@ int main(int argc, char * argv[])
 
 		switch(operation) {
 			case 'r' : //inqury
-				rec_lock(fd, record_no, seizeof(current), F_RDLCK);
+				rec_lock(fd, record_no, sizeof(struct record), F_RDLCK);
 				pos = record_no * sizeof(struct record);
 				lseek(fd, pos, SEEK_SET);
 				n = read(fd, &current, sizeof(struct record));
