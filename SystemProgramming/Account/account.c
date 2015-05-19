@@ -23,7 +23,7 @@ int main(int argc, char * argv[])
 	char yse;
 	char operation;
 	int amount = 0;
-	
+
 	if( (fd = open("Account_File", O_RDWR)) == -1)
 		exit(1); //can not open file
 
@@ -58,6 +58,23 @@ int main(int argc, char * argv[])
 				write(fd, &current, sizeof(struct record));
 				rec_lock(fd, record_no, sizeof(struct record), F_UNLCK);
 				break;
+			case 'w' :
+				rec_lock(fd, record_no, sizeof(struct record), F_WRLCK);
+				pos = record_no * sizeof(struct record);
+				lseek(fd, pos, SEEK_SET);
+				n = read(fd, &current, sizeof(struct record));
+				display(&current);
+				printf("enter amount\n");
+				scanf("%d%*c", &amount);
+				current.balance -= amount;
+				lseek(fd, pos, SEEK_SET);
+				write(fd, &current, sizeof(struct record));
+				rec_lock(fd, record_no, sizeof(struct record), F_UNLCK);
+				break;
+
+			case 'q' :
+				printf("EXIT PROGRAM\n ");
+				return 0;
 			default :
 				printf("input error\n");
 				continue;
