@@ -24,7 +24,7 @@ int main(int argc, char * argv[])
 	char operation;
 	int amount = 0;
 	
-	if( (fd = open("Account_File.txt", O_RDWR)) == -1)
+	if( (fd = open("Account_File", O_RDWR)) == -1)
 		exit(1); //can not open file
 
 	while(1) {
