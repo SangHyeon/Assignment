@@ -22,6 +22,7 @@ int main(int argc, char * argv[])
 {
 	struct record current;
 	int record_no;//account number (0~99)
+	int t_record_no;//transfer account number
 	int fd, pos, n;
 	char operation;
 	int amount;
@@ -77,33 +78,38 @@ int main(int argc, char * argv[])
 				rec_lock(fd, record_no, sizeof(struct record), F_UNLCK);//unlock
 				break;
 			case 't' : //transfer
-				rec_lock(fd, record_no, sizeof(struct record), F_WRLCK);
 				//current account
+				rec_lock(fd, record_no, sizeof(struct record), F_WRLCK);//current lock
+				
 				pos = record_no * sizeof(struct record);
 				lseek(fd, pos, SEEK_SET);
 				n = read(fd, &current, sizeof(struct record));
 				display(&current);
 				printf("<transfer> enter account number \n");
-				scanf("%d%*c", &record_no);
-				if(record_no <= 0 && record_no >= 99) {
+				scanf("%d%*c", &t_record_no);
+				if(t_record_no <= 0 && t_record_no >= 99) {
 					printf("Retry \n");
 					break;
 				}
+				rec_lock(fd, t_record_no, sizeof(struct record), F_WRLCK);//transfer lock
 				printf("<transfer> enter amount\n");
 				scanf("%d%*c", &amount);
 				current.balance -= amount;//transfer balance
 				lseek(fd, pos, SEEK_SET);
 				write(fd, &current, sizeof(struct record));
 				display(&current);
+				
+				rec_lock(fd, record_no, sizeof(struct record), F_UNLCK);//current unlock
+				
 				//transfer account
-				pos = record_no * sizeof(struct record);
+				pos = t_record_no * sizeof(struct record);
 				lseek(fd, pos, SEEK_SET);
 				n = read(fd, &current, sizeof(struct record));
 				current.balance += amount;//transfer
 				lseek(fd, pos, SEEK_SET);
 				write(fd, &current, sizeof(struct record));//complete transfer
 
-				rec_lock(fd, record_no, sizeof(struct record), F_UNLCK);//unlock
+				rec_lock(fd, t_record_no, sizeof(struct record), F_UNLCK);//transfer unlock
 				break;
 
 			case 'q' : //quit
