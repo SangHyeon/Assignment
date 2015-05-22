@@ -40,7 +40,7 @@ int main(int argc, char * argv[])
 		scanf("%c%*c", &operation);
 
 		switch(operation) {
-			case 'r' : //inqury
+			case 'r' : //inquiry
 				rec_lock(fd, record_no, sizeof(struct record), F_RDLCK);//reader's lock
 				pos = record_no * sizeof(struct record);//position of current account info
 				lseek(fd, pos, SEEK_SET);//set position
@@ -59,6 +59,7 @@ int main(int argc, char * argv[])
 				current.balance += amount;//modify balance
 				lseek(fd, pos, SEEK_SET);
 				write(fd, &current, sizeof(struct record));//write balance amount
+				display(&current);
 				rec_lock(fd, record_no, sizeof(struct record), F_UNLCK);//unlock
 				break;
 			case 'w' : //withdraw
@@ -72,6 +73,7 @@ int main(int argc, char * argv[])
 				current.balance -= amount;//modify balance
 				lseek(fd, pos, SEEK_SET);
 				write(fd, &current, sizeof(struct record));
+				display(&current);
 				rec_lock(fd, record_no, sizeof(struct record), F_UNLCK);//unlock
 				break;
 			case 't' : //transfer
@@ -92,6 +94,7 @@ int main(int argc, char * argv[])
 				current.balance -= amount;//transfer balance
 				lseek(fd, pos, SEEK_SET);
 				write(fd, &current, sizeof(struct record));
+				display(&current);
 				//transfer account
 				pos = record_no * sizeof(struct record);
 				lseek(fd, pos, SEEK_SET);
