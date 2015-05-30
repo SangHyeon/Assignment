@@ -14,15 +14,16 @@ pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void *time_triggered()
 {
+	//set time
 	time_t current_time;
 	struct tm *t;
 	time_t timer = time(NULL);
 	pthread_mutex_lock(&mutex);
 	while(1)
 	{
-		pthread_cond_wait(&trigger, &mutex);
+		pthread_cond_wait(&trigger, &mutex);//wait signal...
 		timer = time(NULL);
-		t = localtime(&timer);
+		t = localtime(&timer);//get time
 		printf("y-%d m-%d d-%d %d:%d:%d \n", t->tm_year+1900, t->tm_mon+1, t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec);
 	}
 	pthread_mutex_unlock(&mutex);
@@ -32,14 +33,14 @@ void *time_triggered()
 void alarm_handler(int signo)
 {
 	pthread_mutex_lock(&mutex);
-	ticks++;
-	if(ticks%100 == 0)
+	ticks++;//increase tick for 10ms
+	if(ticks%100 == 0)//1sec
 	{
 		ticks = 0;
 		pthread_cond_signal(&trigger);//wake up the thread
 	}
 	pthread_mutex_unlock(&mutex);
-	signal(SIGALRM, alarm_handler);
+	signal(SIGALRM, alarm_handler);//set SIGALRM handler again
 }
 
 int main(int argc, char* argv[])
