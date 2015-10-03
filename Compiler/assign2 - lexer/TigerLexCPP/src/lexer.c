@@ -172,7 +172,7 @@ int yylex(){
                         else {
                             ungetc(ch, yyin);
                            // cout<<"*****  ch *****  "<<ch<<endl;
-                            ch = -1; //Is it necessary? 
+                            ch = -1; //Is it necessary? [y], very important
                             return DIVIDE;
                         }
                         break;
