@@ -52,17 +52,8 @@ int main(int argc, char **argv)
          printf("%s (%d)\n",tokname(tok),yylval.ival);
          break;
       default:
-         //add something condition
-        // if(strcmp(tokname(tok),"BAD_TOKEN") == 0)
-         
-         //   printf("%s \n", tokname(tok));
-        // else
-        //     printf("%s \n",tokname(tok));
-         if(256 < tok && tok < 300) {
+         if(256 < tok && tok < 300)
              printf("%s \n", tokname(tok));
-         } else {
-             ;//printf("%c \n",tok);
-         }
          break;
       }
    }
