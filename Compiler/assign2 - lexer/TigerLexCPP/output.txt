@@ -1,0 +1,306 @@
+/ 
+* 
+ID (A)
+ID (program)
+ID (to)
+ID (solve)
+ID (the)
+INT (8)
+- 
+ID (queens)
+ID (problem)
+* 
+/ 
+ID (let)
+ID (var)
+ID (N)
+: 
+= 
+INT (8)
+ID (type)
+ID (intArray)
+= 
+ID (array)
+ID (of)
+ID (int)
+ID (var)
+ID (row)
+: 
+= 
+ID (intArray)
+[ 
+ID (N)
+] 
+ID (of)
+INT (0)
+ID (var)
+ID (col)
+: 
+= 
+ID (intArray)
+[ 
+ID (N)
+] 
+ID (of)
+INT (0)
+ID (var)
+ID (diag1)
+: 
+= 
+ID (intArray)
+[ 
+ID (N)
++ 
+ID (N)
+- 
+INT (1)
+] 
+ID (of)
+INT (0)
+ID (var)
+ID (diag2)
+: 
+= 
+ID (intArray)
+[ 
+ID (N)
++ 
+ID (N)
+- 
+INT (1)
+] 
+ID (of)
+INT (0)
+ID (function)
+ID (printboard)
+( 
+) 
+= 
+( 
+ID (for)
+ID (i)
+: 
+= 
+INT (0)
+ID (to)
+ID (N)
+- 
+INT (1)
+ID (do)
+( 
+ID (for)
+ID (j)
+: 
+= 
+INT (0)
+ID (to)
+ID (N)
+- 
+INT (1)
+ID (do)
+ID (print)
+( 
+ID (if)
+ID (col)
+[ 
+ID (i)
+] 
+= 
+ID (j)
+ID (then)
+" 
+ID (O)
+" 
+ID (else)
+" 
+. 
+" 
+) 
+; 
+ID (print)
+( 
+" 
+\ 
+ID (n)
+" 
+) 
+) 
+; 
+ID (print)
+( 
+" 
+\ 
+ID (n)
+" 
+) 
+) 
+ID (function)
+ID (try)
+( 
+ID (c)
+: 
+ID (int)
+) 
+= 
+( 
+/ 
+* 
+ID (for)
+ID (i)
+: 
+= 
+INT (0)
+ID (to)
+ID (c)
+ID (do)
+ID (print)
+( 
+" 
+. 
+" 
+) 
+; 
+ID (print)
+( 
+" 
+\ 
+ID (n)
+" 
+) 
+; 
+ID (flush)
+( 
+) 
+; 
+* 
+/ 
+ID (if)
+ID (c)
+= 
+ID (N)
+ID (then)
+ID (printboard)
+( 
+) 
+ID (else)
+ID (for)
+ID (r)
+: 
+= 
+INT (0)
+ID (to)
+ID (N)
+- 
+INT (1)
+ID (do)
+ID (if)
+ID (row)
+[ 
+ID (r)
+] 
+= 
+INT (0)
+& 
+ID (diag1)
+[ 
+ID (r)
++ 
+ID (c)
+] 
+= 
+INT (0)
+& 
+ID (diag2)
+[ 
+ID (r)
++ 
+INT (7)
+- 
+ID (c)
+] 
+= 
+INT (0)
+ID (then)
+( 
+ID (row)
+[ 
+ID (r)
+] 
+: 
+= 
+INT (1)
+; 
+ID (diag1)
+[ 
+ID (r)
++ 
+ID (c)
+] 
+: 
+= 
+INT (1)
+; 
+ID (diag2)
+[ 
+ID (r)
++ 
+INT (7)
+- 
+ID (c)
+] 
+: 
+= 
+INT (1)
+; 
+ID (col)
+[ 
+ID (c)
+] 
+: 
+= 
+ID (r)
+; 
+ID (try)
+( 
+ID (c)
++ 
+INT (1)
+) 
+; 
+ID (row)
+[ 
+ID (r)
+] 
+: 
+= 
+INT (0)
+; 
+ID (diag1)
+[ 
+ID (r)
++ 
+ID (c)
+] 
+: 
+= 
+INT (0)
+; 
+ID (diag2)
+[ 
+ID (r)
++ 
+INT (7)
+- 
+ID (c)
+] 
+: 
+= 
+INT (0)
+) 
+) 
+ID (in)
+ID (try)
+( 
+INT (0)
+) 
+ID (end)
