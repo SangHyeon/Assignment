@@ -1,6 +1,7 @@
 typedef union  {
 	int ival;
 	string sval;
+    float fval;
 	} YYSTYPE;
 extern YYSTYPE yylval;
 
@@ -47,4 +48,6 @@ extern YYSTYPE yylval;
 # define FUNCTION 297
 # define VAR 298
 # define TYPE 299
+# define DOTDOT 300
+# define FLOAT 301
 
