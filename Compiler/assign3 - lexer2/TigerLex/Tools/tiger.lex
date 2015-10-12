@@ -14,11 +14,16 @@ digit		[0-9]
 integer		{digit}+
 ws			[\ \t]
 
+exp         [Ee][+-]?{integer}
+float       {digit}+{exp}|{digit}+"."{digit}*{exp}?|{digit}*"."{digit}+{exp}?
+
 %%
 
 <INITIAL>\n				{ EM_newline(); continue; }
 <INITIAL>{ws}			{ continue; }
 <INITIAL>{integer}		{ yylval.ival = atoi(yytext); return INT; }
+<INITIAL>{integer}".."	{ unput('.'); unput('.'); yylval.ival = atoi(yytext); return INT; }
+<INITIAL>{float}	    { yylval.fval = atof(yytext); return FLOAT; }
 <INITIAL>","			{ return COMMA; }
 <INITIAL>":"			{ return COLON; }
 <INITIAL>";"			{ return SEMICOLON; }
@@ -29,6 +34,7 @@ ws			[\ \t]
 <INITIAL>"{"            { return LBRACE; }
 <INITIAL>"}"            { return RBRACE; }
 <INITIAL>"."            { return DOT; }
+<INITIAL>".."			{ return DOTDOT; }
 <INITIAL>"+"            { return PLUS; }
 <INITIAL>"-"            { return MINUS; }
 <INITIAL>"*"            { return TIMES; }
