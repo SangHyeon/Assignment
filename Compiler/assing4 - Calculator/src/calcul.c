@@ -10,114 +10,99 @@ double store [26];
 int loc;
 int tok;
 
-double term (void);
-double uterm(void);
+double term_u (void);
 double expression (void);
 void statements (void);
 void statement (void);
-double term_ (void);
-double term_u (void);
+double term (void);
 double factor (void);
 double factor_u (void);
-double expression_ (void);
 
 void yyerror (char* s) {
-	printf ("*** Error: %s\n", s);
+    printf ("*** Error: %s\n", s);
 }
 void program (void) {
-	statements ();
-	printf ("END\n");
+    statements ();
+    printf ("END\n");
 }
 void statements (void) {
-	statement ();
-	while (tok == SEMI || tok == NL) {
-	   tok = yylex ();
-	   statement ();
-	}
-	printf( "tok = %d\n", tok);
+    statement ();
+    while (tok == SEMI || tok == NL) {
+        tok = yylex ();
+        statement ();
+    }
+    printf( "tok = %d\n", tok);
 }
 void statement (void) {
-	if (tok == IDENT) {
-	   loc = yylval.id - 'a';
-	   tok = yylex();
-	   if (tok == ASSIGN) {
-	      tok = yylex();
-	      store [loc] = expression();
-	      printf ("Var %c  = %f\n", loc+'a', store[loc]);
-	   }
-	   else
-	      yyerror ("ASSIGN expected");
-	}
-	else if (tok == PRINT) {
-	   tok = yylex();
-	   printf ("%f\n", expression ());
-	}
-/*****
-	else
-	   yyerror ("IDENT or PRINT expected");
-*****/
+    if (tok == IDENT) {
+        loc = yylval.id - 'a';
+        tok = yylex();
+        if (tok == ASSIGN) {
+            tok = yylex();
+            store [loc] = expression();
+            printf ("Var %c  = %f\n", loc+'a', store[loc]);
+        }
+        else
+            yyerror ("ASSIGN expected");
+    }
+    else if (tok == PRINT) {
+        tok = yylex();
+        printf ("%f\n", expression ());
+    }
+    /*****
+     else
+     yyerror ("IDENT or PRINT expected");
+     *****/
 }
 
 double expression (void) {//E  E->TuE'
-	double temp;
-	temp = term ();//t//Tu
+    double temp;
+    temp = term_u ();//Tu
     //printf("temp is : %f\n", temp);
-    while (tok == PLUS || tok == MINUS) {//E'?
-	   if(tok == PLUS) {
-           tok = yylex ();
-	       temp = temp + term_ ();//tu //T
-       }
-       else {
-           tok = yylex ();
-	       temp = temp - term_ ();//tu //T
-       }
-	}
-	return temp;
-}
-/*
-double expression_ (void) {
-    return 0;
-}
-*/
-/*
-double uterm (void) {//Tu  Tu->FuTu'
-	double temp=factor_u();
-    temp = temp * factor();//Tu' -> *FTu'
-    
+    while (tok == PLUS || tok == MINUS) {//E'->+TE'
+        if(tok == PLUS) {
+            tok = yylex ();
+            temp = temp + term();//T
+        }
+        else {
+            tok = yylex ();
+            temp = temp - term();//T
+        }
+    }
     return temp;
-}*/
-
-double term (void) {//T  T->FuT'
-	double temp = factor_u();
-    while (tok == TIMES || tok == DIVIDE) {//T'
-	   if(tok == TIMES) {
-           tok = yylex ();
-	       temp = temp * factor_u();
-       }
-       else {
-           tok = yylex ();
-	       temp = temp / factor_u();
-       }
-	}
-	return temp;
 }
 
-double term_(void) {//T'  T'->*FT'
-    double temp = factor();
-    while (tok == TIMES || tok == DIVIDE) {//T'
-	   if(tok == TIMES) {
-           tok = yylex ();
-	       temp = temp * factor_u();
-       }
-       else {
-           tok = yylex ();
-	       temp = temp / factor_u();
-       }
-	}
-	return temp;
+double term_u (void) {//Tu->FuTu'
+    double temp = factor_u();//Fu
+    while (tok == TIMES || tok == DIVIDE) {//Tu'->*FTu'
+        if(tok == TIMES) {
+            tok = yylex ();
+            temp = temp * factor();//factor_u 사용하면 3*-1 연산 가능
+        }
+        else {
+            tok = yylex ();
+            temp = temp / factor();
+        }
+    }
+    return temp;
 }
 
-double factor(void) {//F
+double term(void) {//T->FuT'
+    double temp = factor();//F
+    while (tok == TIMES || tok == DIVIDE) {//T'
+        if(tok == TIMES) {
+            tok = yylex ();
+            temp = temp * factor_u();//Fu*FT'
+        }
+        else {
+            tok = yylex ();
+            temp = temp / factor_u();
+        }
+    }
+    return temp;
+}
+
+double factor(void) {//F->(E)
     double temp;
     if(tok == '(') {
         tok = yylex();
@@ -147,11 +132,11 @@ double factor(void) {//F
     return 0;
 }
 
-double factor_u(void) {//Fu
+double factor_u(void) {//Fu->F | -F
     double temp;
     if(tok == MINUS) {
         tok = yylex();
-        temp = -factor();
+        temp = -factor();//F
     }
     else {
         temp = factor();
@@ -162,7 +147,7 @@ double factor_u(void) {//Fu
 
 int main (void)
 {
-	tok = yylex ();
-	program ();
-	return 0;
+    tok = yylex ();
+    program ();
+    return 0;
 }
