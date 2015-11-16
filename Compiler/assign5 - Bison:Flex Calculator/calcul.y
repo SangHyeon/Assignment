@@ -12,7 +12,7 @@ static double store [26];
 %token	<id>	IDENT
 %token	PRINT	ASSIGN	SEMI	NL  COMMA
 %token	'+'	'-'	'*'	'/'	'('	')'
-%type	<num>	expression	term	term1	factor	factor1 print exp0 exp1
+%type	<num>	expression	term	term1	factor	factor1 print exp1
 
 /* precedence table */
 %left	'+' '-'
@@ -79,11 +79,8 @@ factor1
 	  { $$ = store [$<id>1-'a']; }
 	| NUM
 print
-	: exp0
-	| expression { printf("%f\n", $<num>1); }
-exp0
     : expression { printf("%f\n", $<num>1); }
-    | exp0 COMMA expression
+    | print COMMA expression
       { printf("%f\n", $<num>3); }
 %%
 
