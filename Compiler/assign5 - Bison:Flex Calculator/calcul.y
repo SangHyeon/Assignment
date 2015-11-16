@@ -10,9 +10,9 @@ static double store [26];
 
 %token	<num>	NUM
 %token	<id>	IDENT
-%token	PRINT	ASSIGN	SEMI	NL
+%token	PRINT	ASSIGN	SEMI	NL  COMMA
 %token	'+'	'-'	'*'	'/'	'('	')'
-%type	<num>	expression	term	term1	factor	factor1
+%type	<num>	expression	term	term1	factor	factor1 print exp0 exp1
 
 /* precedence table */
 %left	'+' '-'
@@ -31,9 +31,13 @@ statements
 statement
 	: IDENT ASSIGN expression
 	  { store [$<id>1-'a'] = $<num>3; }
-	| PRINT expression
-	  { printf ("%f\n", $<num>2); }
-	| /* empty */
+    | PRINT '('print')' 
+    | /* empty */
+
+exp1
+    : statement
+    | exp1 SEMI statement
+
 expression
 	: expression '+' term1
 	  { $$ = $1 + $3; }
@@ -46,12 +50,16 @@ term
 	| term '/' factor1
 	  { $$ = $1 / $3; }
 	| factor
+    | '('exp1 COMMA expression')'
+      { $$ = $4;}
 term1
 	: term1 '*' factor1
 	  { $$ = $1 * $3; }
 	| term1 '/' factor1
 	  { $$ = $1 / $3; }
 	| factor1
+    | '('exp1 COMMA expression')'
+      { $$ = $4; }
 factor
 	: '(' expression ')'
 	  { $$ = $2; }
@@ -70,7 +78,13 @@ factor1
 	| IDENT
 	  { $$ = store [$<id>1-'a']; }
 	| NUM
-
+print
+	: exp0
+	| expression { printf("%f\n", $<num>1); }
+exp0
+    : expression { printf("%f\n", $<num>1); }
+    | exp0 COMMA expression
+      { printf("%f\n", $<num>3); }
 %%
 
 int main ()
