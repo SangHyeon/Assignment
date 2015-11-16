@@ -27,6 +27,7 @@ print           { return PRINT; }
 =               { return ASSIGN; }
 ;               { return SEMI; }
 \n              { return NL; }
+,               { return COMMA; }
 {operator}      { return yytext[0]; }
 {whitespace}    ;
 .               ; /* Do nothing for illegal character */
