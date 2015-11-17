@@ -12,7 +12,7 @@ static double store [26];
 %token	<id>	IDENT
 %token	PRINT	ASSIGN	SEMI	NL  COMMA
 %token	'+'	'-'	'*'	'/'	'('	')'
-%type	<num>	expression	term	term1	factor	factor1 print exp1
+%type	<num>	expression	term	term1	factor	factor1 print exp0
 
 /* precedence table */
 %left	'+' '-'
@@ -28,16 +28,14 @@ statements
 	: statements SEMI statement
 	| statements NL statement
 	| statement
+exp0
+    : statements SEMI statement
+    | statement
 statement
 	: IDENT ASSIGN expression
 	  { store [$<id>1-'a'] = $<num>3; }
     | PRINT '('print')' 
     | /* empty */
-
-exp1
-    : statement
-    | exp1 SEMI statement
-
 expression
 	: expression '+' term1
 	  { $$ = $1 + $3; }
@@ -50,7 +48,7 @@ term
 	| term '/' factor1
 	  { $$ = $1 / $3; }
 	| factor
-    | '('exp1 COMMA expression')'
+    | '('exp0 COMMA expression')'
       { $$ = $4;}
 term1
 	: term1 '*' factor1
@@ -58,7 +56,7 @@ term1
 	| term1 '/' factor1
 	  { $$ = $1 / $3; }
 	| factor1
-    | '('exp1 COMMA expression')'
+    | '('exp0 COMMA expression')'
       { $$ = $4; }
 factor
 	: '(' expression ')'
