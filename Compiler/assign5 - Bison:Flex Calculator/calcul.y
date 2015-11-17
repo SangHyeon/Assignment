@@ -29,7 +29,7 @@ statements
 	| statements NL statement
 	| statement
 exp0
-    : statements SEMI statement
+    : exp0 SEMI statement
     | statement
 statement
 	: IDENT ASSIGN expression
