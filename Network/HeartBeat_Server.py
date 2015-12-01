@@ -3,6 +3,7 @@
 # We will need the following module to generate randomized lost packets import random
 import random
 import time
+from datetime import datetime, timedelta
 from socket import *
 
 # Create a UDP socket 
@@ -11,29 +12,37 @@ from socket import *
 serverSocket = socket(AF_INET, SOCK_DGRAM)
 serverSocket.bind(('', 12000))
 serverSocket.settimeout(10)
-send_time = time.time()
+#send_time = time.time()
+temp_time = datetime.now().strftime("%H:%M:%S.%f")
+send_time = float(temp_time.split(':')[2])
 while True:
     try:
         # Generate random number in the range of 0 to 10
         rand = random.randint(0, 10)    
         # Receive the client packet along with the address it is coming from 
         message, address = serverSocket.recvfrom(1024)
-        #recv_time = time.time()
-        recv_time = time.mktime(time.strptime(message.split('#')[1], \
-                "%Y-%m-%d %H:%M:%S"))
+        #Second and Microsecond
+        temp_time = datetime.now().strftime("%H:%M:%S.%f")
+        cur_time = float(temp_time.split(':')[2])
+
+        recv_time = float(message.split(':')[2])
+        ping_number = int(message.split(' ')[1])+1
         # Capitalize the message from the client
         message = message.upper()
         # If rand is less is than 4, we consider the packet lost and do not respond
         if rand < 4:
-            time_diff = time.time() - send_time
-            send_time = time.time()
-            print "Can't Receive Packet #Time Difference : %f" % time_diff
+            print "Can't Receive Packet(Ping) Num : %d  #Time Difference : %f" % \
+                    (ping_number, cur_time - send_time)
+            temp_time = datetime.now().strftime("%H:%M:%S.%f")
+            send_time = float(temp_time.split(':')[2])
             continue
+        
+        print 'Packet(Ping) Num : %d  #Time Difference : %f' % \
+                (ping_number, cur_time - recv_time)
         # Otherwise, the server responds    
         serverSocket.sendto(message, address)
-        send_time = time.time()
-        time_diff = time.time() - recv_time - 32400
-        print '#Time Difference : %f' % time_diff
+        temp_time = datetime.now().strftime("%H:%M:%S.%f")
+        send_time = float(temp_time.split(':')[2])
     except timeout:
         print 'Client is Dead'
         break
