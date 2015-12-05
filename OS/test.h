@@ -82,21 +82,32 @@ void dijkstra(int start) {
     int min;
     int cur_position;
     int i, j;
-    for(i=0; i<14; i++) {
-        min = 99999;
-        for(j=0; j<14; j++) {
-            if(min > d[i] && visited[j] == 0) {
-                min = map[i][j];
-                cur_position = j;
+    while(1) {
+        int k;
+        int count = 0;
+        for(k=0; k<14; k++)
+            if(visited[k] != 0)
+                count++;
+        if(count == 14)
+            break;
+        for(i=0; i<14; i++) {
+            min = 99999;
+            for(j=0; j<14; j++) {
+                if(min > d[j] && visited[j] == 0) {
+                    min = d[j];//map[i][j];
+                    cur_position = j;
+                }
             }
         }
         visited[cur_position] = 1;
         for(j=0; j<14; j++) {
-             if (d[j] > map[cur_position][j]+d[cur_position] \
-                     && map[cur_position][j] != 9999) { 
+            if (d[j] > map[cur_position][j]+d[cur_position] \
+                    && map[cur_position][j] != 9999) { 
                 d[j] = map[cur_position][j] + d[cur_position];
+                printf("&&&&&&&&&&&&&&\n");
+                printf("CUR POS : %d\n", cur_position);
                 path[j] = cur_position;
-             } 
+            } 
         }
     }
 }
