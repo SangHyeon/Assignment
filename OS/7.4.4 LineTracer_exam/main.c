@@ -9,6 +9,7 @@
 #include "uart_api.h"
 #include "robot_protocol.h"
 #include "keyboard.h"
+#include "test.h"
 
 
 int main()
@@ -74,10 +75,10 @@ int main()
             case 0xF0: // 1111 0000
                 //RoboCAR_LeftMotor_Control(BACKWARD, 70);
                 //RoboCAR_RightMotor_Control(FORWARD, 80);
-                RoboCAR_AllMotor_Control(FORWARD, 30);
+                RoboCAR_AllMotor_Control(FORWARD, 50);
                 l_turn = 1;
                 //RoboCAR_Move_Angle(3, 80, 90);
-                //usleep(300*1000);
+                usleep(300*1000);
             break;
 
             //우측으로 후진
@@ -104,9 +105,9 @@ int main()
                 //RoboCAR_RightMotor_Control(BACKWARD, 70);
                 //RoboCAR_AllMotor_Control(FORWARD, 35);
                 //RoboCAR_Move_Angle(4, 80, 90);
-                //usleep(300*1000);
-                RoboCAR_AllMotor_Control(FORWARD, 30);
+                RoboCAR_AllMotor_Control(FORWARD, 50);
                 r_turn = 1;
+                usleep(300*1000);
             break;
 
             //좌측으로 후진
@@ -120,12 +121,12 @@ int main()
             // 정지
             case 0xFF:
                 if(l_turn) {
-                    RoboCAR_Move_Angle(3, 80, 85);
+                    RoboCAR_Move_Angle(3, 100, 95);
                     usleep(2000*1000);
                     l_turn = 0;
                 }
                 else if(r_turn) {
-                    RoboCAR_Move_Angle(4, 80, 85);
+                    RoboCAR_Move_Angle(4, 100, 95);
                     usleep(2000*1000);
                     r_turn = 0;
                 }
