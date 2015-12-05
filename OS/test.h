@@ -17,7 +17,7 @@ int top = -1;
 
 //막힌 경우 a와 b로 표시 -> 999로 설정
 //현재 위치는 x와 y로 표시
-void init(int flag, int a, int b, int x, int y) {
+void init(int flag, int a, int b) {
     int i, j;
     for(i=0;i<14;i++) {
         d[i] = 9999;
@@ -66,7 +66,7 @@ void init(int flag, int a, int b, int x, int y) {
     if(flag) {
         map[a][b] = map [b][a] = 9999;
     }
-    for(i=0;i<14;i++) {
+    /*for(i=0;i<14;i++) {
         for(j=0;j<14;j++) {
             if(map[i][j] == 9999)
                 printf("-- ");
@@ -74,7 +74,7 @@ void init(int flag, int a, int b, int x, int y) {
                 printf("%d ", map[i][j]);
         }
         printf("\n");
-    }
+    }*/
 }
 
 void dijkstra(int start) {
@@ -94,7 +94,7 @@ void dijkstra(int start) {
             min = 99999;
             for(j=0; j<14; j++) {
                 if(min > d[j] && visited[j] == 0) {
-                    min = d[j];//map[i][j];
+                    min = d[j];
                     cur_position = j;
                 }
             }
@@ -104,8 +104,8 @@ void dijkstra(int start) {
             if (d[j] > map[cur_position][j]+d[cur_position] \
                     && map[cur_position][j] != 9999) { 
                 d[j] = map[cur_position][j] + d[cur_position];
-                printf("&&&&&&&&&&&&&&\n");
-                printf("CUR POS : %d\n", cur_position);
+                //printf("&&&&&&&&&&&&&&\n");
+                //printf("CUR POS : %d\n", cur_position);
                 path[j] = cur_position;
             } 
         }
