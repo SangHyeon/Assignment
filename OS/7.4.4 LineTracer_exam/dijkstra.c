@@ -1,11 +1,16 @@
-#include"dijkstra.h"
+#include "dijkstra.h"
 
 void init(int flag, int a, int b) {
-int i, j;
+    
+    int i, j;
     for(i=0;i<14;i++) {
         d[i] = 9999;
         for(j=0;j<14;j++)
             map[i][j] = 9999;
+    }
+    for(i=0; i<14; i++) {
+        visited[i] = 0;
+        path[i] = 0;
     }
     //map 초기화
     map[0][1] = map[1][0] = 45;
@@ -95,4 +100,16 @@ void dijkstra(int start) {
         }
     }
 
+}
+
+void push_(int n) {
+    top_++;
+    stack_[top_] = n;
+}
+int pop_() {
+    top_--;
+    return stack_[top_+1];
+}
+int TOP_() {
+    return stack_[top_];
 }
