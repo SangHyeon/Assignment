@@ -9,7 +9,8 @@
 #include "uart_api.h"
 #include "robot_protocol.h"
 #include "keyboard.h"
-#include "test.h"
+//#include "test.h"
+#include "dijkstra.h"
 
 
 int main()
