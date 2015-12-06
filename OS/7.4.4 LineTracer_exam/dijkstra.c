@@ -12,6 +12,12 @@ void init(int flag, int a, int b) {
         visited[i] = 0;
         path[i] = 0;
     }
+
+    robo_state_t = F;//robo_car의 진행 방향
+    for(i = 0; i<15; i++) 
+        stack_t[i] = 0;
+    top_t = -1;
+    
     //map 초기화
     map[0][1] = map[1][0] = 45;
     map[1][2] = map[2][1] = 95;
@@ -103,13 +109,13 @@ void dijkstra(int start) {
 }
 
 void push_(int n) {
-    top_++;
-    stack_[top_] = n;
+    top_t++;
+    stack_t[top_t] = n;
 }
 int pop_() {
-    top_--;
-    return stack_[top_+1];
+    top_t--;
+    return stack_t[top_t+1];
 }
 int TOP_() {
-    return stack_[top_];
+    return stack_t[top_t];
 }

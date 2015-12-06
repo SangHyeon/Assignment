@@ -109,7 +109,7 @@ int main()
             case 0xF0: // 1111 0000
                 start_ = pop_();
                 dest_ = TOP_();
-                direction_ = robo_state_ - dir[start_][dest_];
+                direction_ = robo_state_t - dir[start_][dest_];
                 if(direction_ == 0) {
                     //printf("FRONT\n");
                     printf("ERROR!!!****\n");
@@ -119,20 +119,20 @@ int main()
                     printf("ERROR!!!\n");
                     sleep(3);
 
-                    robo_state_ -=2;
-                    if(robo_state_ < 0)
-                        robo_state_ += 4;
+                    robo_state_t -=2;
+                    if(robo_state_t < 0)
+                        robo_state_t += 4;
                 }
                 else if(direction_ == 1 || direction_ == -3) {
-                    robo_state_--;
-                    if(robo_state_ == 0)
-                        robo_state_ += 4;
+                    robo_state_t--;
+                    if(robo_state_t == 0)
+                        robo_state_t += 4;
                     l_turn = 1;
                 }
                 else if(direction_ == -1 || direction_ == 3) {
-                    robo_state_++;
-                    if(robo_state_ == 5)
-                        robo_state_ = 1;
+                    robo_state_t++;
+                    if(robo_state_t == 5)
+                        robo_state_t = 1;
                     r_turn = 1;
                     printf("ERROR!!!****\n");
                     sleep(3);
@@ -171,7 +171,7 @@ int main()
             case 0x0F: // 0000 1111
                 start_ = pop_();
                 dest_ = TOP_();
-                direction_ = robo_state_ - dir[start_][dest_];
+                direction_ = robo_state_t - dir[start_][dest_];
                 if(direction_ == 0) {
                     //printf("FRONT\n");
                     printf("ERROR!!!****\n");
@@ -181,22 +181,22 @@ int main()
                     printf("ERROR!!!\n");
                     sleep(3);
 
-                    robo_state_ -=2;
-                    if(robo_state_ < 0)
-                        robo_state_ += 4;
+                    robo_state_t -=2;
+                    if(robo_state_t < 0)
+                        robo_state_t += 4;
                 }
                 else if(direction_ == 1 || direction_ == -3) {
-                    robo_state_--;
-                    if(robo_state_ == 0)
-                        robo_state_ += 4;
+                    robo_state_t--;
+                    if(robo_state_t == 0)
+                        robo_state_t += 4;
                     l_turn = 1;
                     printf("ERROR!!!****\n");
                     sleep(3);
                 }
                 else if(direction_ == -1 || direction_ == 3) {
-                    robo_state_++;
-                    if(robo_state_ == 5)
-                        robo_state_ = 1;
+                    robo_state_t++;
+                    if(robo_state_t == 5)
+                        robo_state_t = 1;
                     r_turn = 1;
                 }
                 else {
@@ -215,7 +215,7 @@ int main()
             case 0x00: // 0000 0000 //갈림길일 때
                 start_ = pop_();
                 dest_ = TOP_();
-                direction_ = robo_state_ - dir[start_][dest_];
+                direction_ = robo_state_t - dir[start_][dest_];
                 if(direction_ == 0) {
                     printf("FRONT\n");
                 }
@@ -223,20 +223,20 @@ int main()
                     printf("ERROR!!!\n");
                     sleep(3);
 
-                    robo_state_ -=2;
-                    if(robo_state_ < 0)
-                        robo_state_ += 4;
+                    robo_state_t -=2;
+                    if(robo_state_t < 0)
+                        robo_state_t += 4;
                 }
                 else if(direction_ == 1 || direction_ == -3) {
-                    robo_state_--;
-                    if(robo_state_ == 0)
-                        robo_state_ += 4;
+                    robo_state_t--;
+                    if(robo_state_t == 0)
+                        robo_state_t += 4;
                     l_turn = 1;
                 }
                 else if(direction_ == -1 || direction_ == 3) {
-                    robo_state_++;
-                    if(robo_state_ == 5)
-                        robo_state_ = 1;
+                    robo_state_t++;
+                    if(robo_state_t == 5)
+                        robo_state_t = 1;
                     r_turn = 1;
                 }
                 else {
@@ -256,7 +256,7 @@ int main()
 
             // 정지
             case 0xFF:
-                if(top_ == -1) //목표 지점 도착
+                if(top_t == -1) //목표 지점 도착
                     RoboCAR_AllMotor_Control(STOP,0);
                 
                 if(l_turn) {

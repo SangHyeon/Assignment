@@ -12,10 +12,10 @@ int dir[14][14];//인접 노드의 방향
 int visited[14];////
 int path[14];////
 int d[14];
-int robo_state_ = F;//robo_car의 진행 방향
+int robo_state_t;//robo_car의 진행 방향
 
-int stack_[15] ={0, };
-int top_ = -1;
+int stack_t[15];
+int top_t;
 
 //막힌 경우 a와 b로 표시 -> 999로 설정
 //현재 위치는 x와 y로 표시
