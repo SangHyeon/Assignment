@@ -9,16 +9,30 @@
 #include "uart_api.h"
 #include "robot_protocol.h"
 #include "keyboard.h"
-//#include "test.h"
 #include "dijkstra.h"
 
 
 int main()
 {
+    ////////////////////////////////////////////////
+    int start_pos=0;
     int ret;
     int r_turn = 0;
     int l_turn = 0;
-
+    int finish = 13;
+    int i;
+    int start_;
+    int dest_;
+    int direction_;
+    init(0, 0, 0);
+    dijkstra(start_pos);
+    push_(13);
+    while(finish != start_pos) {
+        push_(path[finish]);
+        finish = path[finish];
+    }
+    //sleep(3);
+    ////////////////////////////////////////////////
     unsigned char Line_Value,tmp_line=0xff;
 
     ret = user_uart1_open("SAC1");
@@ -38,6 +52,15 @@ int main()
     printf("**************************\n");
 
     RoboCAR_AllMotor_Control(STOP,0);
+    
+    ///////////////////////////////////////////////////
+    pop_();//일단 맨 처음 부분 삭제(어차피 직진)
+    /*
+    start_ = pop_();
+    dest_ = TOP_();
+    direction_ = robo_state_ - dir[start_][dest_];
+    */
+    //////////////////////////////////////////////////
 
     while(1)
     {
@@ -54,12 +77,22 @@ int main()
         tmp_line = Line_Value;
 
         switch(Line_Value){
-
             //전진
             case 0xE7:  // 1110 0111
             case 0xEF:  // 1110 1111
             case 0xF7:  // 1111 0111
                 RoboCAR_AllMotor_Control(FORWARD,50);
+                
+                if(l_turn) {
+                    RoboCAR_Move_Angle(3, 100, 95);
+                    usleep(2000*1000);
+                    l_turn = 0;
+                }
+                else if(r_turn) {
+                    RoboCAR_Move_Angle(4, 100, 95);
+                    usleep(2000*1000);
+                    r_turn = 0;
+                }
             break;
 
             //좌회전
@@ -74,6 +107,40 @@ int main()
             case 0xC0: // 1100 0000
             case 0xE0: // 1110 0000
             case 0xF0: // 1111 0000
+                start_ = pop_();
+                dest_ = TOP_();
+                direction_ = robo_state_ - dir[start_][dest_];
+                if(direction_ == 0) {
+                    //printf("FRONT\n");
+                    printf("ERROR!!!****\n");
+                    sleep(3);
+                }
+                else if(direction_ == -2 || direction_ == 2) {
+                    printf("ERROR!!!\n");
+                    sleep(3);
+
+                    robo_state_ -=2;
+                    if(robo_state_ < 0)
+                        robo_state_ += 4;
+                }
+                else if(direction_ == 1 || direction_ == -3) {
+                    robo_state_--;
+                    if(robo_state_ == 0)
+                        robo_state_ += 4;
+                    l_turn = 1;
+                }
+                else if(direction_ == -1 || direction_ == 3) {
+                    robo_state_++;
+                    if(robo_state_ == 5)
+                        robo_state_ = 1;
+                    r_turn = 1;
+                    printf("ERROR!!!****\n");
+                    sleep(3);
+                }
+                else {
+                    printf("ERROR!!!****\n");
+                    sleep(3);
+                }
                 //RoboCAR_LeftMotor_Control(BACKWARD, 70);
                 //RoboCAR_RightMotor_Control(FORWARD, 80);
                 RoboCAR_AllMotor_Control(FORWARD, 50);
@@ -102,13 +169,81 @@ int main()
             case 0x03: // 0000 0011
             case 0x07: // 0000 0111
             case 0x0F: // 0000 1111
+                start_ = pop_();
+                dest_ = TOP_();
+                direction_ = robo_state_ - dir[start_][dest_];
+                if(direction_ == 0) {
+                    //printf("FRONT\n");
+                    printf("ERROR!!!****\n");
+                    sleep(3);
+                }
+                else if(direction_ == -2 || direction_ == 2) {
+                    printf("ERROR!!!\n");
+                    sleep(3);
+
+                    robo_state_ -=2;
+                    if(robo_state_ < 0)
+                        robo_state_ += 4;
+                }
+                else if(direction_ == 1 || direction_ == -3) {
+                    robo_state_--;
+                    if(robo_state_ == 0)
+                        robo_state_ += 4;
+                    l_turn = 1;
+                    printf("ERROR!!!****\n");
+                    sleep(3);
+                }
+                else if(direction_ == -1 || direction_ == 3) {
+                    robo_state_++;
+                    if(robo_state_ == 5)
+                        robo_state_ = 1;
+                    r_turn = 1;
+                }
+                else {
+                    printf("ERROR!!!****\n");
+                    sleep(3);
+                }
                 //RoboCAR_LeftMotor_Control(FORWARD, 80);
                 //RoboCAR_RightMotor_Control(BACKWARD, 70);
                 //RoboCAR_AllMotor_Control(FORWARD, 35);
                 //RoboCAR_Move_Angle(4, 80, 90);
                 RoboCAR_AllMotor_Control(FORWARD, 50);
-                r_turn = 1;
+                //r_turn = 1;
                 usleep(300*1000);
+            break;
+
+            case 0x00: // 0000 0000 //갈림길일 때
+                start_ = pop_();
+                dest_ = TOP_();
+                direction_ = robo_state_ - dir[start_][dest_];
+                if(direction_ == 0) {
+                    printf("FRONT\n");
+                }
+                else if(direction_ == -2 || direction_ == 2) {
+                    printf("ERROR!!!\n");
+                    sleep(3);
+
+                    robo_state_ -=2;
+                    if(robo_state_ < 0)
+                        robo_state_ += 4;
+                }
+                else if(direction_ == 1 || direction_ == -3) {
+                    robo_state_--;
+                    if(robo_state_ == 0)
+                        robo_state_ += 4;
+                    l_turn = 1;
+                }
+                else if(direction_ == -1 || direction_ == 3) {
+                    robo_state_++;
+                    if(robo_state_ == 5)
+                        robo_state_ = 1;
+                    r_turn = 1;
+                }
+                else {
+                    printf("ERROR!!!****\n");
+                    sleep(3);
+                }
+
             break;
 
             //좌측으로 후진
@@ -121,6 +256,9 @@ int main()
 
             // 정지
             case 0xFF:
+                if(top_ == -1) //목표 지점 도착
+                    RoboCAR_AllMotor_Control(STOP,0);
+                
                 if(l_turn) {
                     RoboCAR_Move_Angle(3, 100, 95);
                     usleep(2000*1000);
@@ -131,8 +269,9 @@ int main()
                     usleep(2000*1000);
                     r_turn = 0;
                 }
-                else
+                else {
                     RoboCAR_AllMotor_Control(STOP,0);
+                }
             break;
         }// end switch
 
