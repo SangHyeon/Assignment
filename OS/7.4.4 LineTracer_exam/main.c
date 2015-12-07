@@ -66,7 +66,7 @@ int main()
     {
         if(kbhit()) break;
 
-        usleep(10*1000);
+        usleep(5*1000);
 
         Line_Value= RoboCAR_Get_InfraredRay_Data();
 
@@ -84,7 +84,7 @@ int main()
             case 0xC7:  // 1100 0111
             case 0xC3:  // 1100 0011
                 if(l_turn) {
-                    RoboCAR_Move_Angle(3, 100, 90);
+                    RoboCAR_Move_Angle(3, 90, 90);
                     usleep(1200*1000);
                     l_turn = 0;
                     break;
@@ -92,7 +92,7 @@ int main()
                 else if(r_turn) {
                     printf("&&&&&&&&&&&&&&&\n");
                     RoboCAR_AllMotor_Control(STOP,0);
-                    RoboCAR_Move_Angle(4, 100, 90);
+                    RoboCAR_Move_Angle(4, 90, 80);
                     usleep(1200*1000);
                     r_turn = 0;
                     printf("###############\n");
@@ -107,20 +107,20 @@ int main()
             case 0xFB: //1111 1011
             case 0xF9: //1111 1001
                 if(l_turn) {
-                    RoboCAR_Move_Angle(3, 100, 93);
+                    RoboCAR_Move_Angle(3, 90, 90);
                     usleep(1200*1000);
                     l_turn = 0;
-                    break;
+                    //break;
                 }
                 else if(r_turn) {
                     printf("SHIT\n");
                     printf("&&&&&&&&&&&&&&&\n");
                     RoboCAR_AllMotor_Control(STOP,0);
-                    RoboCAR_Move_Angle(4, 100, 90);
+                    RoboCAR_Move_Angle(4, 90, 80);
                     usleep(1200*1000);
                     r_turn = 0;
                     printf("###############\n");
-                    break;
+                    //break;
                 }
                 RoboCAR_LeftMotor_Control(FORWARD,40);
                 RoboCAR_RightMotor_Control(FORWARD,60);
@@ -172,7 +172,7 @@ int main()
                 //l_turn = 1;
                 //RoboCAR_Move_Angle(3, 80, 90);
                 //usleep(300*1000);
-                usleep(150*1000);
+                usleep(200*1000);
             break;
 
             //우측으로 후진
@@ -188,19 +188,21 @@ int main()
             case 0xDF: // 1101 1111
             case 0x9F: // 1001 1111
                 if(l_turn) {
-                    RoboCAR_Move_Angle(3, 100, 93);
+                    RoboCAR_AllMotor_Control(STOP,0);
+                    RoboCAR_Move_Angle(3, 90, 90);
                     usleep(1200*1000);
                     l_turn = 0;
-                    break;
+                    //break;
                 }
                 else if(r_turn) {
                     printf("SHIT\n");
                     printf("&&&&&&&&&&&&&&&\n");
                     RoboCAR_AllMotor_Control(STOP,0);
-                    RoboCAR_Move_Angle(4, 100, 90);
+                    RoboCAR_Move_Angle(4, 90, 80);
                     usleep(1200*1000);
                     r_turn = 0;
                     printf("###############\n");
+                    //break;
                 }
                 RoboCAR_LeftMotor_Control(FORWARD,60);
                 RoboCAR_RightMotor_Control(FORWARD,40);
@@ -253,7 +255,7 @@ int main()
                 RoboCAR_AllMotor_Control(FORWARD, 50);
                 //r_turn = 1;
                 //usleep(300*1000);
-                usleep(150*1000);
+                usleep(200*1000);
             break;
 
             case 0x00: // 0000 0000 //갈림길일 때
@@ -281,7 +283,7 @@ int main()
                     l_turn = 1;
                     printf("LEFT 2 \n");
                     RoboCAR_AllMotor_Control(FORWARD, 50);
-                    usleep(150*1000);
+                    usleep(200*1000);
                     break;
                 }
                 else if(direction_ == -1 || direction_ == 3) {
@@ -291,7 +293,7 @@ int main()
                     r_turn = 1;
                     printf("RIGHT 2 \n");
                     RoboCAR_AllMotor_Control(FORWARD, 50);
-                    usleep(150*1000);
+                    usleep(200*1000);
                     printf("*******************\n");
                     break;
                 }
@@ -299,9 +301,9 @@ int main()
                     printf("ERROR!!!****\n");
                     //sleep(3);
                 }
-                RoboCAR_AllMotor_Control(FORWARD, 50);
+                ////RoboCAR_AllMotor_Control(FORWARD, 50);
                 //usleep(300*1000);
-                usleep(150*1000);
+                ////usleep(200*1000);
             break;
 
             //좌측으로 후진
@@ -320,12 +322,12 @@ int main()
                 }
                 
                 if(l_turn) {
-                    RoboCAR_Move_Angle(3, 100, 93);
+                    RoboCAR_Move_Angle(3, 90, 90);
                     usleep(1200*1000);
                     l_turn = 0;
                 }
                 else if(r_turn) {
-                    RoboCAR_Move_Angle(4, 100, 90);
+                    RoboCAR_Move_Angle(4, 90, 80);
                     usleep(1200*1000);
                     r_turn = 0;
                 }
