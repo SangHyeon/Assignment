@@ -335,6 +335,11 @@ int main()
                     RoboCAR_AllMotor_Control(STOP,0);
                     RoboCAR_Move_Angle(3, 90, 180);
                     RoboCAR_AllMotor_Control(FORWARD, 50);
+                    
+                    robo_state_t -=2;
+                    if(robo_state_t < 0)
+                        robo_state_t += 4;
+                    
                     top_t = -1;
                     init(1, start_, dest_);
                     start_pos = start_;
