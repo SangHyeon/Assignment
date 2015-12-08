@@ -333,6 +333,17 @@ int main()
                 }
                 else {
                     RoboCAR_AllMotor_Control(STOP,0);
+                    RoboCAR_Move_Angle(3, 90, 180);
+                    RoboCAR_AllMotor_Control(FORWARD, 50);
+                    top_t = -1;
+                    init(1, start_, dest_);
+                    start_pos = start_;
+                    dijkstra(start_pos);
+                    push_(13);
+                    while(finish != start_pos) {
+                        push_(path[finish]);
+                        finish = path[finish];
+                    }
                 }
             break;
         }// end switch
