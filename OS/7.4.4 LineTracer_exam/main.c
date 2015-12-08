@@ -24,6 +24,7 @@ int main()
     int start_;
     int dest_;
     int direction_;
+    int temp_robo_state_t=0;
     init(0, 0, 0);
     dijkstra(start_pos);
     push_(13);
@@ -82,18 +83,20 @@ int main()
             case 0xEF:  // 1110 1111
             case 0xF7:  // 1111 0111
             case 0xC7:  // 1100 0111
-            case 0xC3:  // 1100 0011
+            //case 0xC3:  // 1100 0011
                 if(l_turn) {
-                    RoboCAR_Move_Angle(3, 90, 90);
-                    usleep(1200*1000);
+                    usleep(50*1000);
+                    RoboCAR_Move_Angle(3, 90, 88);
+                    usleep(2000*1000);
                     l_turn = 0;
                     break;
                 }
                 else if(r_turn) {
+                    usleep(50*1000);
                     printf("&&&&&&&&&&&&&&&\n");
                     RoboCAR_AllMotor_Control(STOP,0);
                     RoboCAR_Move_Angle(4, 90, 80);
-                    usleep(1200*1000);
+                    usleep(2000*1000);
                     r_turn = 0;
                     printf("###############\n");
                     break;
@@ -106,24 +109,29 @@ int main()
             case 0xF3: //1111 0011
             case 0xFB: //1111 1011
             case 0xF9: //1111 1001
+                RoboCAR_LeftMotor_Control(FORWARD,40);
+                RoboCAR_RightMotor_Control(FORWARD,60);
+                usleep(130*1000);
                 if(l_turn) {
-                    RoboCAR_Move_Angle(3, 90, 90);
-                    usleep(1200*1000);
+                    //usleep(50*1000);
+                    RoboCAR_Move_Angle(3, 90, 88);
+                    usleep(2000*1000);
                     l_turn = 0;
                     //break;
                 }
                 else if(r_turn) {
+                    //usleep(50*1000);
                     printf("SHIT\n");
                     printf("&&&&&&&&&&&&&&&\n");
                     RoboCAR_AllMotor_Control(STOP,0);
                     RoboCAR_Move_Angle(4, 90, 80);
-                    usleep(1200*1000);
+                    usleep(2000*1000);
                     r_turn = 0;
                     printf("###############\n");
                     //break;
                 }
-                RoboCAR_LeftMotor_Control(FORWARD,40);
-                RoboCAR_RightMotor_Control(FORWARD,60);
+                //RoboCAR_LeftMotor_Control(FORWARD,40);
+                //RoboCAR_RightMotor_Control(FORWARD,60);
             break;
 
             //left turn angle
@@ -172,7 +180,7 @@ int main()
                 //l_turn = 1;
                 //RoboCAR_Move_Angle(3, 80, 90);
                 //usleep(300*1000);
-                usleep(200*1000);
+                usleep(230*1000);
             break;
 
             //우측으로 후진
@@ -187,14 +195,19 @@ int main()
             case 0xCF: // 1100 1111
             case 0xDF: // 1101 1111
             case 0x9F: // 1001 1111
+                RoboCAR_LeftMotor_Control(FORWARD,60);
+                RoboCAR_RightMotor_Control(FORWARD,40);
+                usleep(130*1000);
                 if(l_turn) {
+                    //usleep(10*1000);
                     RoboCAR_AllMotor_Control(STOP,0);
-                    RoboCAR_Move_Angle(3, 90, 90);
-                    usleep(1200*1000);
+                    RoboCAR_Move_Angle(3, 90, 88);
+                    usleep(2000*1000);
                     l_turn = 0;
                     //break;
                 }
                 else if(r_turn) {
+                    //usleep(10*1000);
                     printf("SHIT\n");
                     printf("&&&&&&&&&&&&&&&\n");
                     RoboCAR_AllMotor_Control(STOP,0);
@@ -204,8 +217,8 @@ int main()
                     printf("###############\n");
                     //break;
                 }
-                RoboCAR_LeftMotor_Control(FORWARD,60);
-                RoboCAR_RightMotor_Control(FORWARD,40);
+                //RoboCAR_LeftMotor_Control(FORWARD,60);
+                //RoboCAR_RightMotor_Control(FORWARD,40);
             break;
 
             //right turn angle
@@ -255,7 +268,7 @@ int main()
                 RoboCAR_AllMotor_Control(FORWARD, 50);
                 //r_turn = 1;
                 //usleep(300*1000);
-                usleep(200*1000);
+                usleep(230*1000);
             break;
 
             case 0x00: // 0000 0000 //갈림길일 때
@@ -322,29 +335,54 @@ int main()
                 }
                 
                 if(l_turn) {
-                    RoboCAR_Move_Angle(3, 90, 90);
-                    usleep(1200*1000);
+                    //usleep(200*1000);
+                    RoboCAR_Move_Angle(3, 90, 85);
+                    usleep(2000*1000);
                     l_turn = 0;
                 }
                 else if(r_turn) {
+                    //usleep(200*1000);
                     RoboCAR_Move_Angle(4, 90, 80);
-                    usleep(1200*1000);
+                    usleep(2000*1000);
                     r_turn = 0;
                 }
                 else {
                     RoboCAR_AllMotor_Control(STOP,0);
+                    printf("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n");
                     RoboCAR_Move_Angle(3, 90, 180);
-                    RoboCAR_AllMotor_Control(FORWARD, 50);
+                    usleep(3000*1000);
+
+                    r_turn = 0;
+                    l_turn = 0;
+                    //robo_state_t -=2;
+                    //if(robo_state_t < 0)
+                    //    robo_state_t += 4;
+                    printf("--------- %d   ,  %d ------------\n", direction_, robo_state_t);
                     
-                    robo_state_t -=2;
-                    if(robo_state_t < 0)
-                        robo_state_t += 4;
+                    if(direction_ == 1 || direction_ == -3) {
+                        robo_state_t += 2;
+                        if(robo_state_t >= 5)
+                            robo_state_t = 1;
+                        printf("teststetsetsetsetsetsets\n");
+                    }
+                    else if(direction_ == -1 || direction_ == 3) {
+                        robo_state_t -= 2;
+                        if(robo_state_t <= 0)
+                            robo_state_t += 4;
+                        printf("te***ststetsetsetsetsetsets\n");
+                    }
+
+                    temp_robo_state_t = robo_state_t;
                     
                     top_t = -1;
                     init(1, start_, dest_);
+                    robo_state_t = temp_robo_state_t;
+                    printf("--------- %d   ,  %d ------------\n", direction_, robo_state_t);
+                    printf("===========> START : %d \n", start_);
                     start_pos = start_;
                     dijkstra(start_pos);
                     push_(13);
+                    finish = 13;
                     while(finish != start_pos) {
                         push_(path[finish]);
                         finish = path[finish];
