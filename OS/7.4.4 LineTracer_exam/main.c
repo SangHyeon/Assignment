@@ -84,7 +84,7 @@ int main()
             case 0xC7:  // 1100 0111
             case 0xC3:  // 1100 0011
                 if(l_turn) {
-                    RoboCAR_Move_Angle(3, 90, 90);
+                    RoboCAR_Move_Angle(3, 60, 90);
                     usleep(1200*1000);
                     l_turn = 0;
                     break;
@@ -92,7 +92,7 @@ int main()
                 else if(r_turn) {
                     printf("&&&&&&&&&&&&&&&\n");
                     RoboCAR_AllMotor_Control(STOP,0);
-                    RoboCAR_Move_Angle(4, 90, 80);
+                    RoboCAR_Move_Angle(4, 60, 80);
                     usleep(1200*1000);
                     r_turn = 0;
                     printf("###############\n");
@@ -107,7 +107,7 @@ int main()
             case 0xFB: //1111 1011
             case 0xF9: //1111 1001
                 if(l_turn) {
-                    RoboCAR_Move_Angle(3, 90, 90);
+                    RoboCAR_Move_Angle(3, 60, 90);
                     usleep(1200*1000);
                     l_turn = 0;
                     //break;
@@ -116,7 +116,7 @@ int main()
                     printf("SHIT\n");
                     printf("&&&&&&&&&&&&&&&\n");
                     RoboCAR_AllMotor_Control(STOP,0);
-                    RoboCAR_Move_Angle(4, 90, 80);
+                    RoboCAR_Move_Angle(4, 60, 80);
                     usleep(1200*1000);
                     r_turn = 0;
                     printf("###############\n");
@@ -189,7 +189,7 @@ int main()
             case 0x9F: // 1001 1111
                 if(l_turn) {
                     RoboCAR_AllMotor_Control(STOP,0);
-                    RoboCAR_Move_Angle(3, 90, 90);
+                    RoboCAR_Move_Angle(3, 60, 90);
                     usleep(1200*1000);
                     l_turn = 0;
                     //break;
@@ -198,7 +198,7 @@ int main()
                     printf("SHIT\n");
                     printf("&&&&&&&&&&&&&&&\n");
                     RoboCAR_AllMotor_Control(STOP,0);
-                    RoboCAR_Move_Angle(4, 90, 80);
+                    RoboCAR_Move_Angle(4, 60, 80);
                     usleep(1200*1000);
                     r_turn = 0;
                     printf("###############\n");
@@ -322,18 +322,18 @@ int main()
                 }
                 
                 if(l_turn) {
-                    RoboCAR_Move_Angle(3, 90, 90);
+                    RoboCAR_Move_Angle(3, 60, 90);
                     usleep(1200*1000);
                     l_turn = 0;
                 }
                 else if(r_turn) {
-                    RoboCAR_Move_Angle(4, 90, 80);
+                    RoboCAR_Move_Angle(4, 60, 80);
                     usleep(1200*1000);
                     r_turn = 0;
                 }
                 else {
                     RoboCAR_AllMotor_Control(STOP,0);
-                    RoboCAR_Move_Angle(3, 90, 180);
+                    RoboCAR_Move_Angle(3, 60, 180);
                     RoboCAR_AllMotor_Control(FORWARD, 50);
                     top_t = -1;
                     init(1, start_, dest_);
