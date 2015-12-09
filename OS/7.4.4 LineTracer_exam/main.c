@@ -119,11 +119,11 @@ int main()
                 //RoboCAR_LeftMotor_Control(FORWARD,40);
                 //RoboCAR_RightMotor_Control(FORWARD,90);
                 //usleep(200*1000);
-                RoboCAR_Move_Angle(3, 60, 5);
+                RoboCAR_Move_Angle(4, 60, 5);
                 usleep(200*1000);
                 RoboCAR_AllMotor_Control(BACKWARD, 50);
                 usleep(100*1000);
-                RoboCAR_Move_Angle(4, 60, 5);
+                RoboCAR_Move_Angle(3, 60, 5);
                 usleep(200*1000);
                 RoboCAR_AllMotor_Control(FORWARD, 50);
                 usleep(120*1000);
@@ -220,11 +220,11 @@ int main()
                 /*RoboCAR_LeftMotor_Control(FORWARD,90);
                 RoboCAR_RightMotor_Control(FORWARD,40);
                 usleep(200*1000);*/
-                RoboCAR_Move_Angle(4, 60, 5);
+                RoboCAR_Move_Angle(3, 60, 5);
                 usleep(200*1000);
                 RoboCAR_AllMotor_Control(BACKWARD, 50);
                 usleep(100*1000);
-                RoboCAR_Move_Angle(3, 60, 5);
+                RoboCAR_Move_Angle(4, 60, 5);
                 usleep(200*1000);
                 RoboCAR_AllMotor_Control(FORWARD, 50);
                 usleep(120*1000);
