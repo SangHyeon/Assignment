@@ -114,19 +114,19 @@ int main()
             case 0xFB: //1111 1011
             case 0xFD : //1111 1101
             case 0xF9: //1111 1001
-            case 0x3F: //0011 1111
-            case 0x7F: //0111 1111
+            case 0xFC: // 1111 1100
+            case 0xFE: // 1111 1110
                 //RoboCAR_LeftMotor_Control(FORWARD,40);
                 //RoboCAR_RightMotor_Control(FORWARD,90);
                 //usleep(200*1000);
                 RoboCAR_Move_Angle(3, 60, 5);
                 usleep(200*1000);
-                RoboCAR_AllMotor_Control(FORWARD, 50);
+                RoboCAR_AllMotor_Control(BACKWARD, 50);
                 usleep(100*1000);
                 RoboCAR_Move_Angle(4, 60, 5);
                 usleep(200*1000);
-                RoboCAR_AllMotor_Control(BACKWARD, 50);
-                usleep(100*1000);
+                RoboCAR_AllMotor_Control(FORWARD, 50);
+                usleep(120*1000);
 
                 if(l_turn) {
                     //usleep(50*1000);
@@ -212,22 +212,22 @@ int main()
 */
             //우회전
             case 0xCF: // 1100 1111
-            case 0xFC: // 1111 1100
-            case 0xFE: // 1111 1110
             case 0xDF: // 1101 1111
             case 0xBF: //1011 1111
-            case 0x9F: // 1001 1111
+            case 0x9F: //1001 1111
+            case 0x3F: //0011 1111
+            case 0x7F: //0111 1111
                 /*RoboCAR_LeftMotor_Control(FORWARD,90);
                 RoboCAR_RightMotor_Control(FORWARD,40);
                 usleep(200*1000);*/
                 RoboCAR_Move_Angle(4, 60, 5);
                 usleep(200*1000);
-                RoboCAR_AllMotor_Control(FORWARD, 50);
+                RoboCAR_AllMotor_Control(BACKWARD, 50);
                 usleep(100*1000);
                 RoboCAR_Move_Angle(3, 60, 5);
                 usleep(200*1000);
-                RoboCAR_AllMotor_Control(BACKWARD, 50);
-                usleep(100*1000);
+                RoboCAR_AllMotor_Control(FORWARD, 50);
+                usleep(120*1000);
                 if(l_turn) {
                     printf("InfraredRay = 0x%x\n",Line_Value);
                     //usleep(10*1000);
