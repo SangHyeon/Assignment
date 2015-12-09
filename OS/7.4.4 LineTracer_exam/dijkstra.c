@@ -19,7 +19,6 @@ void init(int flag, int a, int b) {
     top_t = -1;
 
     //map 초기화
-    if(start_init_flag == 0) {
         map[0][1] = map[1][0] = 45;
         map[1][2] = map[2][1] = 95;
         map[2][3] = map[3][2] = 48;
@@ -36,7 +35,6 @@ void init(int flag, int a, int b) {
         map[8][13] = map[13][8] = 70;
         map[11][12] = map[12][11] = 70;
         map[12][13] = map[13][12] = 48;
-    }
 
         //해당 위치에서 다음 위치로 이동하는 방향
         //robo_car 방향 - 가려는 방향 
@@ -60,6 +58,11 @@ void init(int flag, int a, int b) {
 
     if(flag) {
         map[a][b] = map [b][a] = 9999;
+        if(top_cut != -1) {
+            for(i=0; i<=top_cut; i++) {
+                map[CUT[top_cut].a][CUT[top_cut].b] =  map[CUT[top_cut].b][CUT[top_cut].a] = 9999;
+            }
+        }
     }
 
     printf("^^^^^^^^ SECCESS ^^^^^^^^^\n");

@@ -7,6 +7,11 @@
 #define B 3 //Back
 #define L 4 //Left
 
+struct NODE {
+    int a;
+    int b;
+} Node;
+
 int map[14][14];//map
 int dir[14][14];//인접 노드의 방향
 int visited[14];////
@@ -16,8 +21,8 @@ int robo_state_t;//robo_car의 진행 방향
 
 int stack_t[15];
 int top_t;
-int start_init_flag;
-
+int top_cut;
+Node CUT[10];
 //막힌 경우 a와 b로 표시 -> 999로 설정
 //현재 위치는 x와 y로 표시
 void init(int flag, int a, int b);

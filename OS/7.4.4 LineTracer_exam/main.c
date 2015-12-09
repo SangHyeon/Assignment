@@ -25,7 +25,7 @@ int main()
     int dest_;
     int direction_;
     int temp_robo_state_t=0;
-    start_init_flag = 0;
+    top_cut = -1;
     init(0, 0, 0);
     dijkstra(start_pos);
     push_(13);
@@ -33,7 +33,6 @@ int main()
         push_(path[finish]);
         finish = path[finish];
     }
-    start_init_flag = 1;
     //sleep(3);
     ////////////////////////////////////////////////
     unsigned char Line_Value,tmp_line=0xff;
@@ -408,6 +407,9 @@ int main()
                     temp_robo_state_t = robo_state_t;
                     
                     top_t = -1;
+                    top_cut += 1;
+                    CUT[top_cut].a = start_;
+                    CUT[top_cut].b = dest_;
                     init(1, start_, dest_);
                     robo_state_t = temp_robo_state_t;
                     printf("--------- %d   ,  %d ------------\n", direction_, robo_state_t);
