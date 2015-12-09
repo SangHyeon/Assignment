@@ -61,6 +61,8 @@ void init(int flag, int a, int b) {
     if(flag) {
         map[a][b] = map [b][a] = 9999;
     }
+
+    printf("^^^^^^^^ SECCESS ^^^^^^^^^\n");
     /*for(i=0;i<14;i++) {
         for(j=0;j<14;j++) {
             if(map[i][j] == 9999)
