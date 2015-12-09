@@ -67,7 +67,7 @@ int main()
     {
         if(kbhit()) break;
 
-        usleep(5*1000);
+        usleep(10*1000);
 
         Line_Value= RoboCAR_Get_InfraredRay_Data();
 
@@ -85,6 +85,7 @@ int main()
             case 0xC7:  // 1100 0111
             //case 0xC3:  // 1100 0011
                 if(l_turn) {
+                    printf("InfraredRay = 0x%x\n",Line_Value);
                     usleep(50*1000);
                     RoboCAR_Move_Angle(3, 90, 88);
                     usleep(2000*1000);
@@ -92,6 +93,7 @@ int main()
                     break;
                 }
                 else if(r_turn) {
+                    printf("InfraredRay = 0x%x\n",Line_Value);
                     usleep(50*1000);
                     printf("&&&&&&&&&&&&&&&\n");
                     RoboCAR_AllMotor_Control(STOP,0);
@@ -114,6 +116,7 @@ int main()
                 usleep(130*1000);
                 if(l_turn) {
                     //usleep(50*1000);
+                    printf("InfraredRay = 0x%x\n",Line_Value);
                     RoboCAR_Move_Angle(3, 90, 88);
                     usleep(2000*1000);
                     l_turn = 0;
@@ -121,7 +124,7 @@ int main()
                 }
                 else if(r_turn) {
                     //usleep(50*1000);
-                    printf("SHIT\n");
+                    printf("InfraredRay = 0x%x\n",Line_Value);
                     printf("&&&&&&&&&&&&&&&\n");
                     RoboCAR_AllMotor_Control(STOP,0);
                     RoboCAR_Move_Angle(4, 90, 80);
@@ -138,6 +141,7 @@ int main()
             case 0xC0: // 1100 0000
             case 0xE0: // 1110 0000
             case 0xF0: // 1111 0000
+            case 0xF8: // 1111 1000
                 start_ = pop_();
                 dest_ = TOP_();
                 direction_ = robo_state_t - dir[start_][dest_];
@@ -189,6 +193,7 @@ int main()
             case 0xFE: // 1111 1110
                 RoboCAR_LeftMotor_Control(BACKWARD,60);
                 RoboCAR_RightMotor_Control(BACKWARD,40);
+                usleep(130*1000);
             break;
 
             //우회전
@@ -199,6 +204,7 @@ int main()
                 RoboCAR_RightMotor_Control(FORWARD,40);
                 usleep(130*1000);
                 if(l_turn) {
+                    printf("InfraredRay = 0x%x\n",Line_Value);
                     //usleep(10*1000);
                     RoboCAR_AllMotor_Control(STOP,0);
                     RoboCAR_Move_Angle(3, 90, 88);
@@ -207,8 +213,8 @@ int main()
                     //break;
                 }
                 else if(r_turn) {
+                    printf("InfraredRay = 0x%x\n",Line_Value);
                     //usleep(10*1000);
-                    printf("SHIT\n");
                     printf("&&&&&&&&&&&&&&&\n");
                     RoboCAR_AllMotor_Control(STOP,0);
                     RoboCAR_Move_Angle(4, 90, 80);
@@ -225,6 +231,7 @@ int main()
             case 0x03: // 0000 0011
             case 0x07: // 0000 0111
             case 0x0F: // 0000 1111
+            case 0x1F: // 0001 1111
                 start_ = pop_();
                 dest_ = TOP_();
                 direction_ = robo_state_t - dir[start_][dest_];
@@ -325,6 +332,7 @@ int main()
             case 0x7F: //0111 1111
                 RoboCAR_LeftMotor_Control(BACKWARD,40);
                 RoboCAR_RightMotor_Control(BACKWARD,60);
+                usleep(130*1000);
             break;
 
             // 정지
