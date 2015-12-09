@@ -36,6 +36,7 @@ void init(int flag, int a, int b) {
         map[8][13] = map[13][8] = 70;
         map[11][12] = map[12][11] = 70;
         map[12][13] = map[13][12] = 48;
+    }
 
         //해당 위치에서 다음 위치로 이동하는 방향
         //robo_car 방향 - 가려는 방향 
@@ -56,7 +57,6 @@ void init(int flag, int a, int b) {
         dir[8][13] = L; dir[13][8] = R;
         dir[11][12] = F; dir[12][11] = B;
         dir[12][13] = F; dir[13][12] = B;
-    }
 
     if(flag) {
         map[a][b] = map [b][a] = 9999;

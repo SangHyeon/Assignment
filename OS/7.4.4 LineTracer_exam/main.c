@@ -33,7 +33,7 @@ int main()
         push_(path[finish]);
         finish = path[finish];
     }
-    //start_init_flag = 1;
+    start_init_flag = 1;
     //sleep(3);
     ////////////////////////////////////////////////
     unsigned char Line_Value,tmp_line=0xff;
