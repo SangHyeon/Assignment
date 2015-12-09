@@ -116,8 +116,8 @@ int main()
             case 0xF9: //1111 1001
             case 0xFC: // 1111 1100
             case 0xFE: // 1111 1110
-                RoboCAR_LeftMotor_Control(BACKWARD,40);
-                RoboCAR_RightMotor_Control(FORWARD,60);
+                RoboCAR_LeftMotor_Control(BACKWARD,60);
+                RoboCAR_RightMotor_Control(FORWARD,80);
                 usleep(200*1000);
                 /*RoboCAR_Move_Angle(4, 60, 5);
                 usleep(200*1000);
@@ -217,8 +217,8 @@ int main()
             case 0x9F: //1001 1111
             case 0x3F: //0011 1111
             case 0x7F: //0111 1111
-                RoboCAR_LeftMotor_Control(FORWARD,60);
-                RoboCAR_RightMotor_Control(BACKWARD,40);
+                RoboCAR_LeftMotor_Control(FORWARD,80);
+                RoboCAR_RightMotor_Control(BACKWARD,60);
                 usleep(200*1000);
                 /*RoboCAR_Move_Angle(3, 60, 5);
                 usleep(200*1000);
