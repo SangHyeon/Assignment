@@ -60,7 +60,7 @@ void init(int flag, int a, int b) {
         map[a][b] = map [b][a] = 9999;
         if(top_cut != -1) {
             for(i=0; i<=top_cut; i++) {
-                map[CUT[top_cut].a][CUT[top_cut].b] =  map[CUT[top_cut].b][CUT[top_cut].a] = 9999;
+                map[CUT[i].a][CUT[i].b] =  map[CUT[i].b][CUT[i].a] = 9999;
             }
         }
     }
