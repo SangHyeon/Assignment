@@ -16,6 +16,7 @@ int robo_state_t;//robo_car의 진행 방향
 
 int stack_t[15];
 int top_t;
+int start_init_flag;
 
 //막힌 경우 a와 b로 표시 -> 999로 설정
 //현재 위치는 x와 y로 표시
