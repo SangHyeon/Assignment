@@ -33,7 +33,7 @@ int main()
         push_(path[finish]);
         finish = path[finish];
     }
-    start_init_flag = 1;
+    //start_init_flag = 1;
     //sleep(3);
     ////////////////////////////////////////////////
     unsigned char Line_Value,tmp_line=0xff;
@@ -387,9 +387,9 @@ int main()
 
                     r_turn = 0;
                     l_turn = 0;
-                    robo_state_t -=2;
-                    if(robo_state_t < 0)
-                        robo_state_t += 4;
+                    //robo_state_t -=2;
+                    //if(robo_state_t < 0)
+                    //    robo_state_t += 4;
                     printf("--------- %d   ,  %d ------------\n", direction_, robo_state_t);
                     
                     if(direction_ == 1 || direction_ == -3) {
