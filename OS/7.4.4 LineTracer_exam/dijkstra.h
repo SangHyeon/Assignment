@@ -7,10 +7,10 @@
 #define B 3 //Back
 #define L 4 //Left
 
-struct NODE {
+typedef struct NODE {
     int a;
     int b;
-} Node;
+}Node;
 
 int map[14][14];//map
 int dir[14][14];//인접 노드의 방향
